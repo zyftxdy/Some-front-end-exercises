@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			var myTimer=setInterval(function(){
+					var myTime = document.getElementById("time");
+					var today = new Date();
+					var year = today.getFullYear();
+					var month = today.getMonth()+1;
+					var date1 = today.getDate();
+					var day =today.getDay();
+					var week = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
+					var hours = today.getHours();
+					var minute = today.getMinutes()<10?"0"+today.getMinutes():today.getMinutes();
+					var second = today.getSeconds()<10?"0"+today.getSeconds():today.getSeconds();
+					myTime.innerHTML = year + "-" + month + "-" + date1 + " " + week[day]
+					                   + " " + hours + ":" + minute + ":" + second;
+				},1000);
+			//暂停
+			function clearTime(){
+				clearInterval(myTimer);
+			}
+			//重启
+			function setTime(){
+				setInterval(function(){
+					var myTime = document.getElementById("time");
+					var today = new Date();
+					var year = today.getFullYear();
+					var month = today.getMonth()+1;
+					var date1 = today.getDate();
+					var day =today.getDay();
+					var week = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
+					var hours = today.getHours();
+					var minute = today.getMinutes()<10?"0"+today.getMinutes():today.getMinutes();
+					var second = today.getSeconds()<10?"0"+today.getSeconds():today.getSeconds();
+					myTime.innerHTML = year + "-" + month + "-" + date1 + " " + week[day]
+					                   + " " + hours + ":" + minute + ":" + second;
+				},1000);
+			}
+			
+			var myDaoJiShi=setInterval(function(){
+					var myDJS = document.getElementById("daojishi");
+					var today = new Date().getTime();
+
+					var DJS = document.getElementById('DJS').value;
+					//alert(DJS);
+					var todayEnd = new Date(DJS).getTime();
+					var time_distance = todayEnd - today;
+					 // 天
+	                var int_day = Math.floor(time_distance/86400000)
+	                time_distance -= int_day * 86400000;
+	                // 时
+	                var int_hour = Math.floor(time_distance/3600000)
+	                time_distance -= int_hour * 3600000;
+	                // 分
+	                var int_minute = Math.floor(time_distance/60000)
+	                time_distance -= int_minute * 60000;
+	                // 秒
+	                var int_second = Math.floor(time_distance/1000)
+	                // 时分秒为单数时、前面加零
+	                if(int_day < 10){
+	                    int_day = "0" + int_day;
+	                }
+	                if(int_hour < 10){
+	                    int_hour = "0" + int_hour;
+	                }
+	                if(int_minute < 10){
+	                    int_minute = "0" + int_minute;
+	                }
+	                if(int_second < 10){
+	                    int_second = "0" + int_second;
+	                }
+	                myDJS.innerHTML = int_day + "天" + int_hour + "时" + int_minute + "分" + int_second + "秒";
+			},1000);
+
+		</script>
+	</head>
+	<body>
+		<input type="hidden"  id="DJS" value="2019/11/20 12:25:32"/>
+		<div id="time">
+			
+		</div>
+		<div id="daojishi">
+			
+		</div>
+		<button onclick="clearTime();">停止</button>
+		<button onclick="setTime();">重启</button>
+	</body>
+</html>

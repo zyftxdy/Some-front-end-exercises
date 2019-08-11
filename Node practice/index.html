@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>	
+	</head>
+	<body>
+		<!--nodeName 是只读的
+		元素节点的 nodeName 等同于标签名
+		属性节点的 nodeName 是属性名称
+		文本节点的 nodeName 总是 #text
+		文档节点的 nodeName 总是 #document-->
+		
+		<!--nodeValue 属性规定节点的值。
+		元素节点的 nodeValue 是 undefined
+		文本节点的 nodeValue 是文本文本
+		属性节点的 nodeValue 是属性值-->
+		<div id="div1">
+			<p id="p1">这是一个段落</p>
+			<p id="p2">这是另一个段落</p>
+		</div>
+		<script type="text/javascript">
+			//添加节点
+			//这段代码创建了一个新的 <p> 元素：
+			var para = document.createElement("p");
+			//如需向 <p> 元素添加文本，则必须首先创建文本节点。这段代码创建了一个文本节点：
+			var node = document.createTextNode("这是一个新段落。");
+			//然后您需要向 <p> 元素追加这个文本节点：
+			para.appendChild(node);
+			//最后您需要向已有元素追加这个新元素。
+			//这段代码查找一个已有的元素：
+			var element = document.getElementById("div1");
+			//这段代码向这个已有的元素追加新元素：
+			element.appendChild(para);
+			/*前面例子中的 appendChild() 方法，追加新元素作为父的最后一个子。
+			除此之外您还可以使用 insertBefore() 方法：
+			var para = document.createElement("p");
+			var node = document.createTextNode("这是新文本。");
+			para.appendChild(node);
+			
+			var element = document.getElementById("div1");
+			var child = document.getElementById("p1");
+			element.insertBefore(para, child);*/
+			//移除节点
+			var parent = document.getElementById("div1");
+			var child = document.getElementById("p2");
+			parent.removeChild(child);
+			
+			//替换元素
+			var para = document.createElement("p");
+			var node = document.createTextNode("这是新文本。");
+			para.appendChild(node);
+			var parent = document.getElementById("div1");
+			var child = document.getElementById("p1");
+			parent.replaceChild(para, child);
+			
+			//屏幕的宽度
+			screen.width
+			//屏幕的可用宽度
+			screen.availWidth
+			//屏幕的色深
+			screen.colorDepth
+			//屏幕的像素深度
+			screen.pixelDepth
+			//记载新的文档
+			//window .location.assign()
+		</script>
+	</body>
+</html>

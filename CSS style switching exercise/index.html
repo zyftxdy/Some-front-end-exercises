@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style1.css" id="css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			div{display: block;}
+			ul li{list-style-type: none;}
+			#nav{
+				width: 960px;
+				height: 30px;
+				margin: auto;
+				margin-top: 50px;
+				border:1px solid #CCCCCC;
+				background:url(../img/bg01.gif) repeat-x;
+			}
+			.datu{
+				position: relative;
+				float: right;
+				width: 43px;
+			    height: 16px;
+			    top: 7px;
+    			right: 60px;
+    			cursor: pointer;
+    			background: url(../img/bg07.gif) no-repeat;
+			}
+			.liebiao{
+				position: relative;
+				float: right;
+				top: 7px;
+			    width: 43px;
+			    height: 16px;
+    			left: 35px;
+    			cursor: pointer;
+    			background: url(../img/bg04.gif) no-repeat;
+			}
+			.datu:hover{
+				background: url(../img/bg05.gif) no-repeat;
+			}
+			.liebiao:hover{
+				background: url(../img/bg06.gif) no-repeat;
+			}
+			.datu.active{
+				background: url(../img/bg05.gif) no-repeat;
+			}
+			.liebiao.active{
+				background: url(../img/bg06.gif) no-repeat;
+			}
+			#menu{
+				width: 950px;
+				margin:auto;
+				margin-top: 10px;
+			}
+			
+			
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#nav').on('click','a',function(){
+					$(this).addClass('active').siblings().removeClass('active');
+				})
+			})
+			function change(i){
+				var _i = i;
+				var css1 = document.getElementById('css');
+				if(_i == 1){
+					css1.setAttribute("href","css/style1.css");
+				}
+				else if(_i == 2){
+					css1.setAttribute("href","css/style2.css");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="nav">
+			<a class="datu active" href="javaScript:change(1);"></a>
+			<a class="liebiao" href="javaScript:change(2);"></a>
+		</div>
+		<div id="menu">
+			<ul>
+				<li>
+					<img src="../img/img03.jpg" />
+					<div class="details">
+						<p>12345</p>
+						<span>54321</span>
+					</div>
+				</li>
+				<li>
+					<img src="../img/img03.jpg" />
+					<div class="details">
+						<p>12345</p>
+						<span>54321</span>
+					</div>
+				</li>
+				<li>
+					<img src="../img/img03.jpg" />
+					<div class="details">
+						<p>12345</p>
+						<span>54321</span>
+					</div>
+				</li>
+				<li>
+					<img src="../img/img03.jpg" />
+					<div class="details">
+						<p>12345</p>
+						<span>54321</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

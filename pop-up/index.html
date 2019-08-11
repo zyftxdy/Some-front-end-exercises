@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//警告框
+			function try1(){
+				alert("1");
+			}
+			//确认框
+			function try2(){
+				if(confirm("你确定吗?")){
+					alert("1");
+				}else{
+					alert("2");
+				}
+			}
+			//提示框
+			function try3(){
+				var person = prompt("请输入您的名字：", "哈利波特");
+				if (person == null || person == "") {
+				   alert("1");
+				} else {
+				   alert("2");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="try1();">试一试</button>
+		<button onclick="try2();">第二试</button>
+		<button onclick="try3();">第三试</button>
+	</body>
+</html>

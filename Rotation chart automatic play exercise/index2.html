@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>带导航按钮切换</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			div{display: block;}
+			ul li{
+				list-style-type: none;}
+			#sildeBox{
+				margin: 50px auto;
+				width: 961px;
+				height: 460px;
+				overflow: hidden;
+			}
+			#sildeBox img{
+				width: 961px;
+				height: 460px;
+			}
+			#sildeBox ul li{
+				float: left;
+			}
+			#sildeBox ul{
+				width: 4805px;
+				position: relative;
+			}
+			#spanBox{
+				position: absolute;
+				bottom: 180px;
+			}
+			#spanBox span{
+				width: 15px;
+				height: 15px;
+				line-height: 15px;
+				float: left;
+				background-color: transparent;
+				border: 1px solid #E7E7E7;
+				margin-left: 5px;
+				border-radius: 10px;
+				cursor: pointer;
+			}
+			#spanBox span:hover{
+				background-color: #E7E7E7;
+			}
+			#spanBox .active{
+				background-color: #E7E7E7;
+			}
+			#spanChangePre{
+				position: relative;
+				top: 205px;
+				width: 50px;
+			    height: 50px;
+			    font-size: 50px;
+			    text-align: center;
+			    background: url(../img/arrow-l.png);
+			    cursor: pointer;
+			}
+			#spanChangeNext{
+				position: relative;
+				width: 50px;
+			    height: 50px;
+			    left: 911px;
+    			top: 155px;
+			    font-size: 50px;
+			    text-align: center;
+			    background: url(../img/arrow-r.png);
+			    cursor: pointer;
+			}
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var i=0;//第几张图
+				var sildeBox = $('#sildeBox');
+				var ul = sildeBox.find('ul');
+				var oneWidth = sildeBox.find('ul li').eq(0).width();
+				var spanNumber = $('#spanBox').find('span');
+				var t;
+				spanNumber.on('click',function(){
+					$(this).addClass('active').siblings().removeClass('active');
+					i = $(this).index();
+					ul.animate({"right":oneWidth*i},300);
+				})
+				
+				t = setInterval(function(){
+   					i++;
+   					if(i == spanNumber.length){
+   						i = 0;
+   					}
+   					spanNumber.eq(i).trigger('click');
+				},2000);
+				
+				$("#sildeBox").hover(function(){
+					clearInterval(t);
+				},
+				function(){
+					t = setInterval(function(){
+	   					i++;
+	   					if(i == spanNumber.length){
+	   						i = 0;
+	   					}
+	   					spanNumber.eq(i).trigger('click');
+					},2000);
+				})
+				
+				$('#spanChangePre').stop().on('click',function(){
+					i--;
+					if(i < 0){
+						i = spanNumber.length - 1;
+					}
+					spanNumber.eq(i).trigger('click');
+				})
+				
+				$('#spanChangeNext').stop().on('click',function(){
+					i++;
+					if(i == spanNumber.length){
+						i = 0;
+					}
+					spanNumber.eq(i).trigger('click');
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<div id="sildeBox">
+			<ul>
+				<li><img src="../img/T1.jpg"/></li>
+				<li><img src="../img/T1jrxjB_VT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1oTJjBKKT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1RICjB7DT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1vWdTBKDv1RXrhCrK.jpg"/></li>
+			</ul>
+			<div id="spanBox">
+				<span class="active"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div id="spanChangePre"></div>
+			<div id="spanChangeNext"></div>
+		</div>
+	</body>
+</html>

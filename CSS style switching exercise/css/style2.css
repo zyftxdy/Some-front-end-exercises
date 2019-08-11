@@ -1,0 +1,8 @@
+#menu ul li{
+				margin-bottom: 5px;
+				border-bottom: 1px dashed;
+			}
+			#menu ul li img{
+				width: 100px;
+				height: 100px;
+			}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.loading{
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 100;
+				background: #fff;
+			}
+			.pic{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+				text-align: center;
+				line-height: 100px;
+			}
+			.loading .pic span{
+				display: block;
+				width:80px;
+				height: 80px;
+				position: absolute;
+				top: 10px;
+				left: 10px;
+				border-radius: 50%;
+				box-shadow: 0 3px 0 #642663;
+				margin: auto;
+				animation: load 1.1s infinite linear;
+			}
+			@keyframes load{
+				0%{transform: rotate(0deg);}
+				100%{transform: rotate(360deg);}
+			}
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		   $(function(){
+		   	   var img = $("img");
+		   	   var num = 0;
+		   	   img.each(function(i){
+		   	   	
+		   	   		var oImg = new Image();
+		   	   		
+		   	   		oImg.onload=function(){
+		   	   			oImg.onload = null;
+		   	   			num++;
+		   	   			$(".loading b").html(parseInt(num/$("img").size()*100)+"%");
+		   	   			if(num>=i){
+		   	   				$(".loading").fadeOut();
+		   	   			}
+		   	   		}
+		   	   		
+		   	   		oImg.src = img[i].src;
+		   	   })
+		   })
+		</script>
+	</head>
+	<body>
+		<div class="loading">
+			<div class="pic">
+				<span></span>
+				<b>0%</b>
+			</div>
+		</div>
+		<img src="http://g.hiphotos.baidu.com/image/pic/item/5366d0160924ab18014cefd83bfae6cd7a890b82.jpg" alt=""/>
+		<img src="http://a.hiphotos.baidu.com/image/pic/item/4610b912c8fcc3cebba8b8e09c45d688d53f20fc.jpg" alt=""/>
+		<img src="http://h.hiphotos.baidu.com/image/pic/item/b3b7d0a20cf431ad64d5c3eb4536acaf2fdd98d9.jpg" alt=""/>	
+		<img src="http://h.hiphotos.baidu.com/image/pic/item/b3b7d0a20cf431ad64d5c3eb4536acaf2fdd98d9.jpg" alt=""/>	
+		<img src="http://h.hiphotos.baidu.com/image/pic/item/b3b7d0a20cf431ad64d5c3eb4536acaf2fdd98d9.jpg" alt=""/>	
+		<img src="http://h.hiphotos.baidu.com/image/pic/item/b3b7d0a20cf431ad64d5c3eb4536acaf2fdd98d9.jpg" alt=""/>	
+	</body>
+</html>

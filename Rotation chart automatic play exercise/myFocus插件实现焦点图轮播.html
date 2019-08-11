@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			div{display: block;}
+			ul li{
+				list-style-type: none;
+				float: left;
+			}
+			#picBox{
+				height: 460px;
+				overflow: hidden;	
+			}
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myfocus-2.0.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			myFocus.set({
+				id:'picBox',
+				pattern:'mF_fancy',//风格应用的名称
+			    time:3,//切换时间间隔(秒)
+			    trigger:'click',//触发切换模式:'click'(点击)/'mouseover'(悬停)
+			    width:961,//设置图片区域宽度(像素)
+			    height:460,//设置图片区域高度(像素)
+			    txtHeight:'default'//文字层高度设置(像素),'default'为默认高度，0为隐藏
+			});
+		</script>
+	</head>
+	<body>
+		<div id="picBox">
+			 <div class="loading"><img src="../img/loading.gif" alt="请稍候..." /></div>
+			<div class="pic">
+				<ul>
+					<li><img src="../img/T1jrxjB_VT1RXrhCrK.jpg"/></li>
+					<li><img src="../img/T1RICjB7DT1RXrhCrK.jpg"/></li>
+					<li><img src="../img/T1oTJjBKKT1RXrhCrK.jpg"/></li>
+					<li><img src="../img/T1vWdTBKDv1RXrhCrK.jpg"/></li>
+					<li><img src="../img/T1.jpg"/></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

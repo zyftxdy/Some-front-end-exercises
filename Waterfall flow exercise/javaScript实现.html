@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			div{display: block;}
+			#main{
+				position: relative;
+			}
+			.box{
+				padding: 15px 0 0 15px;
+				float: left;
+			}
+			.pic{
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				box-shadow:0 0 5px #ccc;
+			}
+			.pic img{
+				width: 165px;
+				height: auto;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				waterfall('main','box');
+				var dataInt={'data':[{'src':'23.jpg'},{'src':'24.jpg'},{'src':'25.jpg'},{'src':'26.jpg'}]};
+				window.onscroll=function(){
+					if(checkscrollside()){
+			            var oParent = document.getElementById('main');// 父级对象
+			            for(var i=0;i<dataInt.data.length;i++){
+			                var oPin=document.createElement('div'); //添加 元素节点
+			                oPin.className='box';                   //添加 类名 name属性
+			                oParent.appendChild(oPin);              //添加 子节点
+			                var oBox=document.createElement('div');
+			                oBox.className='pic';
+			                oPin.appendChild(oBox);
+			                var oImg=document.createElement('img');
+			                oImg.src='img/'+dataInt.data[i].src;
+			                oBox.appendChild(oImg);
+			            }
+			            waterfall('main','box');
+			        };
+				}
+			}
+			function waterfall(parent,box){
+				//将main下的所有box的元素取出来
+				var oParent = document.getElementById(parent);
+				var oBoxs = getByClass(oParent,box);
+				//计算整个页面显示的列数;
+				var oBoxW = oBoxs[0].offsetWidth;
+				var cols = Math.floor(document.documentElement.clientWidth/oBoxW);
+				//console.log(cols);
+				oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;';
+				var hArr = [];//存放每列高度的数组
+				for(var i = 0; i< oBoxs.length; i++){
+					if(i<cols){
+						hArr.push(oBoxs[i].offsetHeight);
+					}else{
+						var minH = Math.min.apply(null,hArr);
+						var index=getminHIndex(hArr,minH);
+			            oBoxs[i].style.position='absolute';//设置绝对位移
+			            oBoxs[i].style.top=minH+'px';
+			            oBoxs[i].style.left=oBoxW*index+'px';
+			            //数组 最小高元素的高 + 添加上的aPin[i]块框高
+			            hArr[index]+=oBoxs[i].offsetHeight;//更新添加了块框后的列高
+					}
+				}
+			}
+			
+			//根据Class获取元素
+			function getByClass(parent,className){
+				var boxArr = new Array();
+				var obj=parent.getElementsByTagName('*');//获取 父级的所有子集
+			    var pinS=[];//创建一个数组 用于收集子元素
+			    for (var i=0;i<obj.length;i++) {//遍历子元素、判断类别、压入数组
+			        if (obj[i].className==className){
+			            pinS.push(obj[i]);
+			            //console.log(obj[i].offsetHeight);
+			        }
+			    };
+				return pinS;
+			}
+			
+			/****
+		    *获取 hArr高度 最小值的索引index
+		    */
+			function getminHIndex(arr,minH){
+			    for(var i in arr){
+			        if(arr[i]==minH){
+			            return i;
+			        }
+			    }
+			}
+			
+			//检测是否具备滚动加载条件
+			function checkscrollside(){
+			    var oParent=document.getElementById('main');
+			    var aBox=getByClass(oParent,'box');
+			    var lastPinH=aBox[aBox.length-1].offsetTop+Math.floor(aBox[aBox.length-1].offsetHeight/2);//创建【触发添加块框函数waterfall()】的高度：最后一个块框的距离网页顶部+自身高的一半(实现未滚到底就开始加载)
+			    var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;//注意解决兼容性
+			    var documentH=document.documentElement.clientHeight;//页面高度
+			    return (lastPinH<scrollTop+documentH)?true:false;//到达指定高度后 返回true，触发waterfall()函数
+			}
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<div class="box">
+				<div class="pic">
+					<img src="img/0.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/1.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/2.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/3.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/4.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/5.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/6.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/7.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/8.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/9.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/10.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/11.jpg"/>
+				</div>
+			</div>
+			
+			<div class="box">
+				<div class="pic">
+					<img src="img/12.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/13.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/14.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/15.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/16.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/17.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/18.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/19.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/20.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/21.jpg"/>
+				</div>
+			</div>
+			<div class="box">
+				<div class="pic">
+					<img src="img/22.jpg"/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

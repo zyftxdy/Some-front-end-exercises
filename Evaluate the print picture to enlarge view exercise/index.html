@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul {
+				padding: 0;
+			}
+			.photos,.photos-thumb {
+				zoom: 1;
+			}
+			.photos-thumb {
+				margin: 10px 0;
+				list-style-type: none;
+				height: 45px;
+			}
+			.photos-thumb li {
+				float: left;
+				border: 2px solid #f2f2f2;
+				padding: 2px;
+				margin-right: 8px;
+				position: relative;
+				transition: border-color .2s ease-out;
+			}
+			.photos-thumb .tm-current {
+				border: 2px solid #f23d6a;
+				border-radius: 2px;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				-o-border-radius: 2px;
+				cursor: auto;
+			}
+			
+			.photos-arrow {
+				width: 0;
+				height: 0;
+				line-height: 0;
+				font-size: 0;
+				border: 6px dashed transparent;
+				border-top: 6px solid #f23d6a;
+				position: absolute;
+				left: 15px;
+				filter: alpha(opacity=0);
+				opacity: 0;
+				bottom: -12px;
+				background: 0 0;
+			}
+			.tm-current .photos-arrow {
+				filter: alpha(opacity=100);
+				opacity: 1;
+			}
+			.photos-thumb img {
+				display: block;
+				width: 40px;
+				height: 40px;
+				cursor: url(../img/1.png), auto;
+			}
+			.photo-viewer, .photo-viewer img,.photos-thumb .tm-current img {
+				cursor: url(../img/2.png), auto; 
+			}
+			.photo-viewer {
+				position: relative;
+				margin: 10px 0;
+				width: 0;
+				height: 0;
+				border: 1px solid #ccc;
+				background: #fff;
+				padding: 2px;
+				overflow: hidden;
+				display: none;
+				transition: all 0.2s ease-in;
+			}
+			.photo-viewer-navleft,  .photo-viewer-navright {
+				top: 0;
+				bottom: 0;
+				position: absolute;
+				width: 30%;
+				background: url(http://assets.alicdn.com/s.gif); /*解决IE 下背景透明的空白元素无法触发 click 和 hover 事件*/
+			}
+			.photo-viewer-navleft {
+				left: 0;
+			}
+			.photo-viewer-navright {
+				right: 0;
+			}
+			.photo-viewer-navleft i,  .photo-viewer-navright i{
+				top: 50%;
+				margin-top:-24px;
+				position: absolute;
+				width: 48px;
+				height: 48px;
+				display: none;
+			}
+			.photo-viewer-navleft i{
+				left: 0;
+				background-image: url(../img/arrow-l.png);
+			}
+			.photo-viewer-navright i{
+				right: 0;
+				background-image: url(../img/arrow-r.png);
+			}
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var _this = $(this);
+				var imgNav = _this.find('.photos-thumb').children();
+				var imgViewBox = _this.find('.photo-viewer');
+				var prevBtn = _this.find('.photo-viewer-navleft');
+				var nextBtn = _this.find('.photo-viewer-navright');
+				var src = "";
+				var img = new Image();
+				
+				//大图显示
+				function setViewImg(viewSrc){
+					img.src = viewSrc;
+					var imgWidth = img.width;
+					var imgHeight = img.height;
+					imgViewBox.show()
+					.css({ "width": imgWidth, "height": imgHeight }).find("img").attr('src', src);
+				}
+				
+				//小图点击事件
+				imgNav.on('click',function(){
+					$(this).toggleClass('tm-current').siblings().removeClass('tm-current');
+					if($(this).hasClass('tm-current')){
+						src = $(this).attr('data-src');
+						setViewImg(src);
+					}else{
+						imgViewBox.css({ "width": 0, "height": 0 }).hide();
+					}
+				})
+				
+				//大图点击事件
+				imgViewBox.on('click',function(){
+					imgNav.removeClass('tm-current');
+					$(this).css({ "width": 0, "height": 0 }).hide();
+				})
+				
+				prevBtn.hover(function () {				
+	            var index = imgNav.index(_this.find('.photos-thumb').children('.tm-current'));	            
+	            if (index < 1) {
+	                $(this).css({"cursor":"default"}).children().hide();	      
+	            } else {
+	                $(this).css({"cursor":"pointer"}).children().show();
+	            }
+		        }, function () {
+		            $(this).css({"cursor":"default"}).children().hide();
+		        });	
+		        
+		        nextBtn.hover(function () {
+		            var index = imgNav.index(_this.find('.photos-thumb').children('.tm-current'));	            
+		            if (index >= imgNav.length - 1) {
+		                $(this).css({"cursor":"default"}).children().hide();		                
+		            } else {
+		                $(this).css({"cursor":"pointer"}).children().show();
+		            }
+		        }, function () {
+		            $(this).css({"cursor":"default"}).children().hide();
+		        });
+		        
+		        //上一页
+		        prevBtn.on("click",function (e) {
+		        	e.stopPropagation();//阻止事件向上冒泡
+		            var index = imgNav.index(_this.find('.photos-thumb').children('.tm-current'));            	            
+		            if (index > 0) {
+		            	index--;
+		            	imgNav.eq(index).toggleClass('tm-current').siblings().removeClass('tm-current');
+	                	src = imgNav.eq(index).attr('data-src');	
+			            setViewImg(src);
+		            }            
+		            if (index <= 0) {	          
+		                $(this).css({"cursor":"default"}).children().hide();
+		            }
+		        });
+		        
+		        //下一页
+		        nextBtn.on("click",function (e) {
+		        	e.stopPropagation();//阻止事件向上冒泡
+		            var index = imgNav.index(_this.find('.photos-thumb').children('.tm-current'));
+		            if (index < imgNav.length - 1) {
+		            	index++;
+		            	imgNav.eq(index).toggleClass('tm-current').siblings().removeClass('tm-current');
+		            	src = imgNav.eq(index).attr('data-src');	
+			            setViewImg(src);	
+		    		}
+		            if (index >= imgNav.length - 1) {
+		                $(this).css({"cursor":"default"}).children().hide();
+		            }
+		        })
+			})
+		</script>
+	</head>
+	<body>
+		<div class="photos">
+		  	<ul class="photos-thumb">
+		    	<li data-src="../img/01.png"> <img src="../img/01.png"> <b class="photos-arrow"></b> </li>
+		    	<li data-src="../img/02.png"> <img src="../img/02.png"> <b class="photos-arrow"></b> </li>
+		    	<li data-src="../img/03.png"> <img src="../img/03.png"> <b class="photos-arrow"></b> </li>
+		    	<li data-src="../img/04.png"> <img src="../img/04.png"> <b class="photos-arrow"></b> </li>
+		  	</ul>
+		  	<div class="photo-viewer"> 
+			  	<img src="../img/01.png"> 
+				<a class="photo-viewer-navleft"><i></i></a> 
+				<a class="photo-viewer-navright"><i></i></a> 
+			</div>
+		</div>
+	</body>
+</html>

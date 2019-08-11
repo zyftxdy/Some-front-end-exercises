@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车--体育用品商城</title>
+		<link type="text/css" rel="stylesheet" href="css/cart.css" />
+		<style type="text/css">
+			.list-datils ul li{
+				padding: 5px;
+			}
+			.list-datils ul{
+				padding: 10px;
+			}
+			.cart-table tr{
+				border-bottom: 1px solid #ebebeb;
+			}
+			.text-center{
+				text-align: center;
+				font-size: 18px;
+				color: coral;
+			}
+			.text-center a:hover{
+				color:#C60023;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//calTotal();
+				$("[type='button']").click(function(){
+					var v = $(this).val();
+					var num=$("#number",this.parentNode);
+					var n=num.val();
+					if('+'==v){
+						num.val(parseInt(n)+1);
+					}else{
+						if(parseInt(n) == 1){
+							if(confirm("确定要删除吗?")){
+								$(this).parents("tr").remove();	
+							}
+						}else{
+							num.val(parseInt(n)-1);
+							
+						}
+					}
+					btnClick($(this).parents("tr"));
+					calTotal();
+				});
+			})
+			
+			function btnClick(tr){
+					var price = $("#price",tr).val();
+					var num = $("#number",tr).val();
+					//alert(price+" "+num);
+					$('#list-total',tr).text(price * num);
+			}
+			
+			
+			function selectdisplayall(currobj){
+			    var flag =currobj.checked;
+			    var _checkProductId = document.getElementsByName('productCheckId');
+			    var _selectAll = document.getElementsByClassName('select-all');
+			    for(var i=0;i<_checkProductId.length;i++){
+			    	_checkProductId[i].checked = flag; 
+			    }
+			    for(var i=0;i<_selectAll.length;i++){
+			    	_selectAll[i].checked = flag; 
+			    } 
+			}
+			
+			function calTotal(){
+				var total = 0;
+				var _productId = $('.select');
+				$('.list-count').each(function(){
+					var price = $(this).parents("tr").find('#price').val();
+					var num = $(this).parents("tr").find('#number').val();
+					$(this).parents("tr").find("#list-total").text(parseInt(num)*parseInt(price));
+					total = total + (parseInt(num)*parseInt(price));
+				});	
+				$('#sumbit-total').text(total);
+			}
+		</script>
+	</head>
+	<body class="body">
+		<!--主体-->
+		<div class="main">
+			<!--购物车-->
+			<div class="main-cart">
+				<div class="cart-header">
+					<table class="cart-table">
+						<tbody>
+							<tr>
+								<th class="cart-check"><input type="checkbox"  class="select-all" onchange="selectdisplayall(this);"/><span>全选</span></th>
+								<th class="cart-info">商品信息</th>
+								<th class="cart-datils">商品详情</th>
+								<th class="cart-price">单价</th>
+								<th class="cart-count">数量</th>
+								<th class="cart-total">合计</th>
+								<th class="cart-opera">操作</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="cart-list">
+					<table class="cart-table" productId="#">
+						<tr>
+							<td class="list-check"><input type="checkbox" name="productCheckId" class="select"/></td>
+							<td class="list-img"><a href="#" target="_blank"><img src="img/tennis.png"/></a></td>
+							<td class="list-info">
+								<a href="#" target="_blank">
+									Midea/美的 BCD-535WKZM(E)冰箱双开门无霜智能家用厨卫家电
+								</a>
+							</td>
+							<td class="list-datils">
+								<ul>
+								<li>颜色:</li>
+								<li>尺寸:</li>
+								<li>鞋码:</li>
+								</ul>
+							</td>
+							<td class="list-price">¥5000</td>
+							<td class="list-count">
+								<input type="button" class="reduce" value="-"/>
+								<input type="hidden" id="price" value="5000"/>
+								<input type="text" value="1" id="number" readonly="readonly">
+								<input type="button" class="reduce" value="+"/>
+							</td>
+							<td class="list-total">¥<span id="list-total">5000</span></td>
+							<td class="list-opera"><a href="#">删除</a></td>
+						</tr>
+						<tr>
+							<td class="list-check"><input type="checkbox" name="productCheckId" class="select"/></td>
+							<td class="list-img"><a href="#" target="_blank"><img src="img/tennis.png"/></a></td>
+							<td class="list-info">
+								<a href="#" target="_blank">
+									Midea/美的 BCD-535WKZM(E)冰箱双开门无霜智能家用厨卫家电
+								</a>
+							</td>
+							<td class="list-datils">
+								<ul>
+								<li>颜色:</li>
+								<li>尺寸:</li>
+								<li>鞋码:</li>
+								</ul>
+							</td>
+							<td class="list-price">¥4000</td>
+							<td class="list-count">
+								<input type="button" class="reduce" value="-"/>
+								<input type="hidden" id="price" value="4000"/>
+								<input type="text" class="p-count" value="1" id="number" readonly="readonly">
+								<input type="button" class="reduce" value="+"/>
+							</td>
+							<td class="list-total">¥<span id="list-total">4000</span></td>
+							<td class="list-opera"><a href="#">删除</a></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="cart-footer">
+					<div class="select-on">
+						<label><input type="checkbox"  onchange="selectdisplayall(this);"  class="select-all"/><span>全选</span></label>
+					</div>
+					<div class="delete-on">
+						<a href=""><img src="img/laji.png"/>删除选中</a>
+					</div>
+					<div class="sumbit-on">
+						<span>总价:</span>
+						<span class="sumbit-total">¥<span id="sumbit-total" style="font-size: 18px;">0</span></span>
+						<a href="#">去结算</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

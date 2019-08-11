@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.menu{
+				position: relative;
+			}
+			#div1{
+				position: relative;
+				width: 100px;
+				height: 100px;
+				background-color: aquamarine;
+				cursor: url(../img/1.png),auto;
+			}
+			#div2{
+				position: relative;
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				
+			}
+			#div3{
+				position: relative;
+				width: 100px;
+				height: 100px;
+				background-color: blueviolet;
+				cursor: url(../img/1.png),auto;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript">
+			/*$(function(){
+				
+				//donghua();	
+				$('#div1').hover(function(){
+					$('#div2')
+					.css({'opacity':1})
+					.fadeIn('1000');
+				},
+				function(){
+					$('#div2').fadeOut('slow');
+				}
+				
+				)
+			})
+			function donghua(){
+				$("#div1").animate({height:'300px',opacity:'0.4'},'slow');
+					$("#div1").animate({width:'300px',opacity:'0.8'},'slow');
+					$("#div1").animate({height:'100px',opacity:'0.4'},'slow');
+					$("#div1").animate({width:'100px',opacity:'0.8'},'slow',function(){donghua()});
+			}*/
+		</script>
+	</head>
+	<body>
+		<!--animate动画效果-->
+		<div id="menu">
+			<div id="div1">
+				
+			</div>
+			<div id="div2">
+				
+			</div>
+			<div id="div3">
+				
+			</div>
+		</div>
+	</body>
+</html>

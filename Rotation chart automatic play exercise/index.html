@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>不带导航按钮切换</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul li{
+				list-style-type: none;
+				float: left;	
+			}
+			#big_photos{
+				margin: 50px auto;
+				width: 961px;
+				height: 460px;
+				overflow: hidden;
+			}
+			#big_photos_src img{
+				width: 961px;
+				height: 460px;
+			}
+			#big_photos ul{
+				width: 4805px;
+				position: relative;
+			}
+			#big_photos ul li{
+				width: 961px;
+				height: 460px;
+				position: relative;
+			}
+		</style>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//不带可点击图片
+			$(function(){
+				var i=0;
+			    var big_banner_pic = $("#big_photos_src");
+			    var allimg=$("#big_photos_src li").length;
+			    function img_change(){
+			        var img_i=i*-961+"px";
+			        big_banner_pic.animate({opacity:".2"},100,function(){
+			            big_banner_pic.css("left",img_i );
+			            big_banner_pic.animate({
+			                opacity: "1"
+			            }, 100);
+			        })
+			    }
+			    function automatic(){
+			        i+=1;
+			        if(i>=allimg){
+			            i=0;
+			        }
+			        img_change();
+			    }
+			    change_self_time = setInterval(automatic, 3000);
+			    //轮播上一张下一张图标控制
+			    $("#big_photos").hover(function(){
+			        clearInterval(change_self_time);
+			        //$("#big_banner_change_wrap").children().show();
+			    },function(){
+			        change_self_time = setInterval(automatic, 3000);
+			        //$("#big_banner_change_wrap").children().hide();
+    			})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="big_photos">
+			<ul id="big_photos_src">	
+				<li><img src="../img/T1jrxjB_VT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1RICjB7DT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1oTJjBKKT1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1vWdTBKDv1RXrhCrK.jpg"/></li>
+				<li><img src="../img/T1.jpg"/></li>
+			</ul>
+		</div>
+	</body>
+</html>

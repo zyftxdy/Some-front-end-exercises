@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			div{display: block;}
+			a{text-decoration: none;}
+			ul li{list-style-type: none;}
+			.waiter{
+				position: fixed;/*根据浏览器窗口定位*/
+				width: 60px;
+				top: 50%;
+				right: 20px;
+				box-shadow:0px 0px 20px rgba(0,0,0,.3);
+				z-index: 999;
+				background-color:#efefef;
+			}
+			.waiter ul li{
+				position: relative;
+				height: 60px;
+				line-height: 60px;
+				border-bottom: 1px solid #fff;
+				color: #fff;
+				text-align: center;
+				transition: all .6s;
+			}
+			.waiter a{
+				position: absolute;
+			    left: 0;
+			    top: 0;
+			    z-index: 2;
+			    color: #fff;
+			    display: block;
+			    width: 60px;
+			    height: 60px;
+			    line-height: 60px;
+			    text-align: center;
+			    transition: all 0.6s;
+			    -webkit-transition: all 0.6s;
+			    -ms-transition: all 0.6s;
+			    -moz-transition: all 0.6s;
+			    text-decoration: none;
+			}
+			.miaosha{
+				background-color: #f60;
+			}
+			.kefu{
+				background-color: #00b7ee;
+			}
+			.dingbu{
+				background-color: #333;
+			}
+			.waiter-title{
+				position: absolute;
+			    width: 80px;
+			    height: 40px;
+			    left: -20px;
+			    line-height: 40px;
+			    /* top: 0px; */
+			    bottom: 1px;
+			    text-align: center;
+			    transition: all .6s;
+			    color: #fff;
+			    -webkit-transition: all 0.6s;
+			    box-shadow: 0px 0px 10px rgba(0,0,0,.3);
+			    opacity: 0;
+			    z-index: -1;
+			}
+			.miaosha .waiter-title{
+				background-color: #f60;
+			}
+			.kefu .waiter-title{
+				background-color: #00b7ee;
+			}
+			.dingbu .waiter-title{
+				background-color: #333;
+			}
+			.waiter ul li:hover .waiter-title{
+				left: -88px;
+				opacity: 1;
+			}
+		</style>
+	</head>
+	<body style="background-color:#efefef;height:2000px;">
+		<div class="waiter">
+			<ul>
+				<li class="miaosha">
+					<a href="#">秒杀</a>
+					<div class="waiter-title">商品秒杀</div>
+				</li>
+				<li class="kefu">
+					<a href="#">客服</a>
+					<div class="waiter-title">询问客服</div>
+				</li>
+				<li class="dingbu">
+					<a href="#">顶部</a>
+					<div class="waiter-title">回到顶部</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

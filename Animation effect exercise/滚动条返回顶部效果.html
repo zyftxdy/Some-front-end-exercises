@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#btn {
+				width:40px; 
+				height:40px; 
+				position:fixed; 
+				right:65px; 
+				bottom:10px; 
+				display:none; 
+				background:url(img/top_bg.png) no-repeat left top;
+			}
+			#btn:hover {
+				background:url(img/top_bg.png) no-repeat 0 -39px;
+			}
+			.bg {
+				width:1190px;
+				 margin:0 auto;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var btn = document.getElementById('btn');
+				var clientWidth = document.documentElement.clientHeight;
+				var timer = null;
+				var isStop = true;
+				
+				window.onscroll = function(){
+					var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+					if(osTop >= clientWidth){
+						$('#btn').show();	
+					}else{
+						$('#btn').hide();	
+					}
+					if(!isStop){
+						clearInterval(timer);
+					}
+					isStop = false;
+				}
+				
+				btn.onclick=function(){
+					if(timer){
+						clearInterval(timer);
+					}
+					//alert("1");
+					timer = setInterval(function(){
+						var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+						var iSpeed = Math.floor(-osTop /10);
+						document.body.scrollTop = document.documentElement.scrollTop -= osTop + iSpeed;
+						isStop = true;
+						if(osTop == 0){
+							clearInterval(timer);
+						}
+					},30);
+				}
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="bg">
+			<img src="img/tb_bg.jpg" alt="" />	
+		</div>
+		<span  id="btn" title="回到顶部"></span>
+	</body>
+</html>
